@@ -3,3 +3,18 @@ variable "aws_region" {
   type        = string
   default     = "ap-south-1"
 }
+
+variable "my_ip" {
+  description = "Your public IP address for SSH access"
+  type        = string
+}
+
+variable "ami_id" {
+  description = "Ubuntu AMI ID"
+  type        = string
+}
+
+variable "key_name" {
+  description = "AWS key pair name"
+  type        = string
+}
