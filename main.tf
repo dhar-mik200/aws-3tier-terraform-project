@@ -27,3 +27,23 @@ module "ec2" {
   key_name          = var.key_name
   project_name      = "three-tier"
 }
+
+module "rds" {
+  source = "./modules/rds"
+
+  project_name       = "three-tier"
+  private_subnet_ids = module.vpc.private_subnet_ids
+  db_sg_id           = module.security_group.db_sg_id
+
+  db_name     = var.db_name
+  db_username = var.db_username
+  db_password = var.db_password
+}
+
+module "monitoring" {
+  source = "./modules/monitoring"
+
+  project_name = "three-tier"
+  instance_id  = module.ec2.instance_id
+  alert_email  = var.alert_email
+}
